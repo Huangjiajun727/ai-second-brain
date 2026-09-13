@@ -1,29 +1,6 @@
-notes = [
-    {
-        "id": 1,
-        "title": "Python",
-        "content": "学习 Python 基础语法",
-        "tag": "programming"
-    },
-    {
-        "id": 2,
-        "title": "Vue",
-        "content": "学习 Vue 3",
-        "tag": "frontend"
-    },
-    {
-        "id": 3,
-        "title": "FastAPI",
-        "content": "学习 Python Web 后端",
-        "tag": "backend"
-    },
-    {
-        "id": 4,
-        "title": "AI学习",
-        "content": "从0开始的转ai从0开始的转ai从0开始的转ai",
-        "tag": "programming"
-    }
-];
+from storage import load_notes,save_notes
+
+notes = load_notes()
 
 #查看全部笔记
 def list_notes() -> None:
@@ -76,6 +53,8 @@ def create_notes(title: str, content: str, tag: str) -> None:
             'tag': tag,
             'id': new_id
         });
+        save_notes(notes);
+
         print('笔记创建成功！');
     except* ValueError as error:
         for item in error.exceptions:
@@ -88,6 +67,7 @@ def delete_notes(note_id: int) -> None:
         for item in notes:
             if item['id'] == note_id:
                 notes.remove(item);
+                save_notes(notes);
                 print('删除成功！')
                 break;
         else:

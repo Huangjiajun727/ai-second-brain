@@ -1,5 +1,4 @@
 from notes import *
-from storage import load_notes
+from storage import load_notes,save_notes
 
 list_notes()
-load_notes()

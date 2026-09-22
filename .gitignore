@@ -1,0 +1,12 @@
+# Python 虚拟环境
+.venv/
+venv/
+
+# Python 字节码缓存
+__pycache__/
+*.py[cod]
+
+# uv / 构建产物
+*.egg-info/
+dist/
+build/

@@ -1,0 +1,17 @@
+[project]
+name = "week4"
+version = "0.1.0"
+description = "第4周练习：笔记程序（uv + src 布局）"
+readme = "README.md"
+authors = [
+    { name = "huangjiajun", email = "hjj@cdqcp.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+week4 = "week4.main:main"
+
+[build-system]
+requires = ["uv_build>=0.12.17,<0.13.0"]
+build-backend = "uv_build"

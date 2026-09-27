@@ -1,8 +1,9 @@
 """程序入口：uv run week4 会调用这里的 main()"""
 
-from week4.notes import create_notes, list_notes, get_note, delete_notes
-from week4.request import root
 import asyncio
+
+from week4.notes import create_notes1
+from week4.request import root
 
 
 def main() -> None:
@@ -13,8 +14,10 @@ def main() -> None:
     # create_notes('测试', '测试时间和Id', '开发')
     # get_note('61c0c7cb-dd12-4c63-abf6-11d9b64b0386')
     # delete_notes('61c0c7cb-dd12-4c63-abf6-11d9b64b0386')
+    create_notes1({"title": "测试", "content": "测试字典入参", "tag": "测试"})
 
-print(asyncio.run(root())) 
 
-if __name__ == '__main__':
+print(asyncio.run(root()))
+
+if __name__ == "__main__":
     main()

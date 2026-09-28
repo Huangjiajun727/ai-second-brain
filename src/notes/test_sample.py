@@ -1,6 +1,6 @@
 import pytest
 
-from week4.notes import count_notes, create_notes, get_note
+from notes.service import count_notes, create_notes, get_note
 
 
 # Arrange

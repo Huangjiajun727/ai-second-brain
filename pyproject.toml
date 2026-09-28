@@ -1,7 +1,7 @@
 [project]
-name = "week4"
+name = "notes"
 version = "0.1.0"
-description = "第4周练习：笔记程序（uv + src 布局）"
+description = "笔记程序（uv + src 布局）"
 readme = "README.md"
 authors = [
     { name = "huangjiajun", email = "hjj@cdqcp.com" }
@@ -13,10 +13,10 @@ dependencies = [
 ]
 
 [project.scripts]
-week4 = "week4.main:main"
+notes = "notes.main:main"
 
 [tool.fastapi]
-entrypoint = "week4.request:app"
+entrypoint = "notes.request:app"
 
 [build-system]
 requires = ["uv_build>=0.12.17,<0.13.0"]

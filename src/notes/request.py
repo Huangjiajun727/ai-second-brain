@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from week4.notes import count_notes, create_notes1, delete_notes, get_note, search_notes
+from notes.service import count_notes, create_notes1, delete_notes, get_note, search_notes
 
 app = FastAPI()
 

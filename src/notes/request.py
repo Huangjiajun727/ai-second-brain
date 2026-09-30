@@ -1,6 +1,13 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
-from notes.service import count_notes, create_notes1, delete_notes, get_note, search_notes
+from notes.service import (
+    count_notes,
+    create_notes1,
+    delete_notes,
+    get_note,
+    search_notes,
+)
 
 app = FastAPI()
 
@@ -41,3 +48,24 @@ async def deletenotes(id: str):
         return {"msg": "删除成功"}
     else:
         return {"msg": "删除失败"}
+
+
+@app.get("/testquery/{id}/test/{name}")
+async def testquery(
+    id: str, needy: str, name: str, isok: bool = False, num: int | None = None
+):
+    return {"id": id, "needy": needy, "name": name, "isok": isok, "num": num}
+
+
+class Mynote(BaseModel):
+    id: str
+    name: str
+    isok: bool
+    num: int | None = None
+
+
+@app.post("/testpost/{id}/test/{name}")
+async def testpost(mynote: Mynote, id: str, name: str, num: int | None = None):
+    mynote = mynote.model_dump()
+    mynote.update({"params": id + name})
+    return mynote

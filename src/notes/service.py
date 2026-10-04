@@ -24,6 +24,7 @@ def list_notes() -> None:
                 print(
                     f"标题是：{item['title']}，内容是{item['content']}，标签是{item['tag']}"
                 )
+            return notes
         else:
             raise Exception("当前暂无笔记")
         logger.info("查看结束")
@@ -137,20 +138,36 @@ def create_notes1(data: dict):
 
         new_id = str(uuid4())
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        notes.append(
-            {
-                "title": new_data.title,
-                "content": new_data.content,
-                "tag": new_data.tag,
-                "id": new_id,
-                "created_at": time,
-                "updated_at": time,
-            }
-        )
+        item = {
+            "title": new_data.title,
+            "content": new_data.content,
+            "tag": new_data.tag,
+            "id": new_id,
+            "created_at": time,
+            "updated_at": time,
+        }
+        notes.append(item)
         save_notes(notes)
         print("笔记创建成功！")
 
-        return True
+        return item
+    except* ValueError as error:
+        for item in error.exceptions:
+            print(item)
+
+
+# 修改笔记
+def update_notes(note_id: str, data: dict):
+    """修改笔记"""
+    try:
+        new_data = vars(Note(data))
+        for i, item in enumerate(notes):
+            if item["id"] == note_id:
+                old_data = item
+                updated_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                notes[i] = {**old_data, **new_data, "updated_at": updated_at}
+                save_notes(notes)
+                return notes[i]
     except* ValueError as error:
         for item in error.exceptions:
             print(item)
@@ -166,8 +183,7 @@ def delete_notes(note_id: str) -> None:
                 save_notes(notes)
                 print("删除成功！")
                 return True
-        else:
-            raise Exception("笔记不存在，无法删除")
+        raise Exception("笔记不存在，无法删除")
     except Exception as error:
         print(error)
 

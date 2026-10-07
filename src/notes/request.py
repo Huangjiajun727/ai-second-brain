@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from typing import Annotated
+
+from fastapi import Depends, FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from notes.service import (
@@ -68,3 +70,14 @@ async def deletenotes(id: str) -> None:
         return {"msg": "删除成功"}
     else:
         raise HTTPException(status_code=404, detail="未找到该笔记删除失败！")
+
+
+def get_current_user(user_id: str, name: str):
+    return {"user_id": user_id, "name": name}
+
+
+@app.get("/me/{id}")
+async def me(
+    current_user: Annotated[dict, Depends(get_current_user)], keyword: str, id: str
+):
+    return {**current_user, "keyword": keyword, "id": id}

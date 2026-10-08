@@ -12,7 +12,14 @@ from notes.service import (
     update_notes,
 )
 
+from .router import user
+
 app = FastAPI()
+
+app.include_router(
+    user.router,
+    prefix="/user",
+)
 
 
 class NoteResponse(BaseModel):
